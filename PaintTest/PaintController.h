@@ -16,9 +16,16 @@ protected slots:
 	void			onMousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void			onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void			onMouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons);
+	void			onButtonSelect(int id);
+
 
 private:
 	PaintView*			_view;
 
 	QGraphicsLineItem*	_line;
+
+	QPoint _point;
+
+	int _option;
+
 };

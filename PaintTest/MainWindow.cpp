@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags flags) :
 	_view = new PaintView(this);
 	this->setCentralWidget(_view);
 	this->adjustSize();
+	this->setWindowTitle("MyPaintApp");
 
 	_controller = new PaintController(this, _view);
 	connect(_view, SIGNAL(mousePress(QPoint, Qt::MouseButtons)),
@@ -16,4 +17,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags flags) :
 		_controller, SLOT(onMouseMove(QPoint, Qt::MouseButtons)));
 	connect(_view, SIGNAL(mouseRelease(QPoint, Qt::MouseButtons)),
 		_controller, SLOT(onMouseRelease(QPoint, Qt::MouseButtons)));
+	connect(_view, SIGNAL(buttonSelect(int)),
+		_controller, SLOT(onButtonSelect(int)));
 }
+
