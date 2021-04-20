@@ -1,0 +1,7 @@
+GeneratedFiles/
+x64/
+
+PaintTest.vcxproj.user
+
+PaintTest.xcodeproj/*
+!PaintTest.xcodeproj/project.pbxproj

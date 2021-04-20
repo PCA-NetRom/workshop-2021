@@ -8,7 +8,7 @@ Application development
 - - - -
 2. Download Qt Installer (Open source)
     * https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4
-4. Install Qt version 5.15 msvc2017 64-bit
+4. Install Qt version 5.15 msvc2019 64-bit
     * Sign-up for Qt
     * Select Custom installation for Qt (preferably also D as the installation drive - aprox 2GB disk space will be needed) 
     * Expand Qt 5.15.2 and select msvc2019 64-bit. Leave all other options as default.

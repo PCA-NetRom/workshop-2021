@@ -3,6 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 
+#include "PaintView.h"
+#include "PaintController.h"
 #include "ui_painttest.h"
 
 class MainWindow : public QMainWindow
@@ -13,6 +15,9 @@ public:
 
 private:
 	Ui::PaintTest			_ui;
+
+	PaintView*				_view;
+	PaintController*		_controller;
 };
 
 #endif // MAINWINDOW_H
