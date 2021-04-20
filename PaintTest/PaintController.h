@@ -16,8 +16,9 @@ protected slots:
 	void			onMousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void			onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void			onMouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void			onButtonSelect(int id);
-
+	void			onButtonSelect(std::string buttonName);
+	void			onSpaceKeyHeldDown(const Qt::Key& keyPressed);
+	void			onSpaceKeyRelease(const Qt::Key& keyPressed);
 
 private:
 	PaintView*			_view;
@@ -26,6 +27,9 @@ private:
 
 	QPoint _point;
 
-	int _option;
+	std::string _option;
+
+	bool _scribbling;
+	bool _spaceKeyHeldDown;
 
 };

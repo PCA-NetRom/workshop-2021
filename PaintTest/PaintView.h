@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/qpushbutton.h>
 #include <QtWidgets/qcolordialog.h>
@@ -22,13 +22,18 @@ signals:
 	void				mousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void				mouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void				mouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void				buttonSelect(int id);
+	void				buttonSelect(std::string buttonName);
 	void				penColorChange(const QColor& color);
 	void				penWidthChange(const int& width); 
+	void				spaceKeyHeldDown(const Qt::Key& keyPressed);
+	void				spaceKeyRelease(const Qt::Key& keyPressed);
+
 private:
 	void				mousePressEvent(QMouseEvent* event) override;
 	void				mouseMoveEvent(QMouseEvent* event) override;
 	void				mouseReleaseEvent(QMouseEvent* event) override;
+	void				keyPressEvent(QKeyEvent* event) override;
+	void				keyReleaseEvent(QKeyEvent* event) override;
 	QPen 				getPen();
 
 public slots:

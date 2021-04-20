@@ -85,6 +85,25 @@ void PaintView::mouseReleaseEvent(QMouseEvent* event)
 	emit mouseRelease(pos, buttons);
 }
 
+void PaintView::keyPressEvent(QKeyEvent* event)
+{
+	if (event == nullptr)
+		return;
+
+	if (event->isAutoRepeat() && event->key() == Qt::Key_Space)
+	{
+		emit spaceKeyHeldDown(Qt::Key_Space);
+	}
+}
+
+void PaintView::keyReleaseEvent(QKeyEvent* event)
+{
+	if (!event->isAutoRepeat() && event->key() == Qt::Key_Space)
+	{
+		emit spaceKeyRelease(Qt::Key_Space);
+	}
+}
+
 
 QPen PaintView::getPen()
 {
@@ -93,12 +112,12 @@ QPen PaintView::getPen()
 
 
 void PaintView::clickLineButton() {
-	emit buttonSelect(1);
+	emit buttonSelect("LineButton");
 }
 
 void PaintView::clickDrawButton()
 {
-	emit buttonSelect(0);
+	emit buttonSelect("DrawButton");
 }
 
 void PaintView::clickPenColorButton()
