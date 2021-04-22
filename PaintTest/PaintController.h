@@ -17,9 +17,9 @@ public slots:
 	void			onActionLine();
 
 protected slots:
-	void			onMousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void			onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void			onMouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons);
+	void			onMousePress(const QPointF& pos, const Qt::MouseButtons& buttons);
+	void			onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
+	void			onMouseRelease(const QPointF& pos, const Qt::MouseButtons& buttons);
 
 private:
 	PaintView*			_view;

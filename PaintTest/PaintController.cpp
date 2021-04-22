@@ -30,7 +30,7 @@ void PaintController::onActionLine()
 	_selectedTool = kLineTool;
 }
 
-void PaintController::onMousePress(const QPoint& pos, const Qt::MouseButtons& buttons)
+void PaintController::onMousePress(const QPointF& pos, const Qt::MouseButtons& buttons)
 {
 	if (_selectedTool == kLineTool)
 	{
@@ -38,7 +38,7 @@ void PaintController::onMousePress(const QPoint& pos, const Qt::MouseButtons& bu
 	}
 }
 
-void PaintController::onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons)
+void PaintController::onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons)
 {
 	if (buttons != Qt::MouseButton::LeftButton)
 		return;
@@ -51,6 +51,6 @@ void PaintController::onMouseMove(const QPoint& pos, const Qt::MouseButtons& but
 	}
 }
 
-void PaintController::onMouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons)
+void PaintController::onMouseRelease(const QPointF& pos, const Qt::MouseButtons& buttons)
 {
 }

@@ -14,9 +14,9 @@ public:
 	QGraphicsLineItem*	createLine(const QLineF& line);
 
 signals:
-	void				mousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void				mouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
-	void				mouseRelease(const QPoint& pos, const Qt::MouseButtons& buttons);
+	void				mousePress(const QPointF& pos, const Qt::MouseButtons& buttons);
+	void				mouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
+	void				mouseRelease(const QPointF& pos, const Qt::MouseButtons& buttons);
 
 public slots:
 	void				onLineThickessChanged(const QString& lineThickness);

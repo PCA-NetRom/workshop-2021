@@ -34,34 +34,21 @@ QGraphicsLineItem* PaintView::createLine(const QLineF& line)
 
 void PaintView::mousePressEvent(QMouseEvent* event)
 {
-	QPointF posF = mapToScene(event->pos());
-
-	QPoint pos;
-	pos.setX(posF.x());
-	pos.setY(posF.y());
-
+	QPointF pos = mapToScene(event->pos());
 	Qt::MouseButtons buttons = event->buttons();
 	emit mousePress(pos, buttons);
 }
 
 void PaintView::mouseMoveEvent(QMouseEvent* event)
 {
-	QPointF posF = mapToScene(event->pos());
-
-	QPoint pos;
-	pos.setX(posF.x());
-	pos.setY(posF.y());
+	QPointF pos = mapToScene(event->pos());
 	Qt::MouseButtons buttons = event->buttons();
 	emit mouseMove(pos, buttons);
 }
 
 void PaintView::mouseReleaseEvent(QMouseEvent* event)
 {
-	QPointF posF = mapToScene(event->pos());
-
-	QPoint pos;
-	pos.setX(posF.x());
-	pos.setY(posF.y());
+	QPointF pos = mapToScene(event->pos());
 	Qt::MouseButtons buttons = event->buttons();
 	emit mouseRelease(pos, buttons);
 }

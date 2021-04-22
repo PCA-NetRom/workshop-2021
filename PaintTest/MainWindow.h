@@ -16,7 +16,7 @@ public:
 
 public slots:
 	void				onColorChanged(const QColor& color);
-	void				onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
+	void				onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
 
 private:
 	void				initLeftToolBar();

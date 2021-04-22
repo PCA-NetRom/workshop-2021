@@ -13,14 +13,14 @@ MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags flags) :
 	this->adjustSize();
 
 	_controller = new PaintController(this, _view);
-	connect(_view, SIGNAL(mousePress(QPoint, Qt::MouseButtons)),
-			_controller, SLOT(onMousePress(QPoint, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseMove(QPoint, Qt::MouseButtons)),
-		_controller, SLOT(onMouseMove(QPoint, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseMove(QPoint, Qt::MouseButtons)),
-		this, SLOT(onMouseMove(QPoint, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseRelease(QPoint, Qt::MouseButtons)),
-		_controller, SLOT(onMouseRelease(QPoint, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mousePress(QPointF, Qt::MouseButtons)),
+			_controller, SLOT(onMousePress(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
+		_controller, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
+		this, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseRelease(QPointF, Qt::MouseButtons)),
+		_controller, SLOT(onMouseRelease(QPointF, Qt::MouseButtons)));
 
 	initLeftToolBar();
 	initTopToolBar();
@@ -77,9 +77,9 @@ void MainWindow::onColorChanged(const QColor& color)
 	_topToolBar->widgetForAction(_actionColor)->setStyleSheet("background: " + color.name());
 }
 
-void MainWindow::onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons)
+void MainWindow::onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons)
 {
 	QString msg;
-	msg.sprintf("%dx%d", pos.x(), pos.y());
+	msg.sprintf("%1.0fx%1.0f", pos.x(), pos.y());
 	statusBar()->showMessage(msg);
 }
