@@ -12,6 +12,10 @@ public:
 					PaintController(QObject *parent, PaintView* view);
 					~PaintController();
 
+public slots:
+	void			onActionSelect();
+	void			onActionLine();
+
 protected slots:
 	void			onMousePress(const QPoint& pos, const Qt::MouseButtons& buttons);
 	void			onMouseMove(const QPoint& pos, const Qt::MouseButtons& buttons);
@@ -21,4 +25,6 @@ private:
 	PaintView*			_view;
 
 	QGraphicsLineItem*	_line;
+
+	QString				_selectedTool;
 };
