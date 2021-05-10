@@ -1,12 +1,14 @@
 #include "PaintView.h"
 
+#include <QDebug>
 #include <QMouseEvent>
 
 static const int	kWindowWidth	= 800;
 static const int	kWindowHeight	= 600;
 
 PaintView::PaintView(QWidget *parent)
-	: QGraphicsView(parent)
+	: QGraphicsView(parent),
+	_pen(QBrush(Qt::black), 1)
 {
 	initScene();
 
@@ -16,7 +18,19 @@ PaintView::PaintView(QWidget *parent)
 
 QGraphicsLineItem* PaintView::createLine(const QLineF& line)
 {
-	return _scene->addLine(line);
+	return _scene->addLine(line, _pen);
+}
+
+void PaintView::onActionLineThicknessTriggered(const QString& lineThickness)
+{
+	qDebug() << "action Line Thickness triggered: " << lineThickness;
+	_pen.setWidth(lineThickness.toInt());
+}
+
+void PaintView::onColorSelected(const QColor& color)
+{
+	qDebug() << "action Color triggered";
+	_pen.setColor(color);
 }
 
 void PaintView::initScene()

@@ -15,18 +15,14 @@ static const QString kColorAction			= "colorAction";
 PaintController::PaintController(QObject *parent, PaintView* view)
 	: QObject(parent),
 	_view(view),
-	_selectedTool(""),
-	_pen(QBrush(Qt::black), 1)
+	_selectedTool("")
 {
 }
 
 void PaintController::onMousePress(const QPointF& pos, const Qt::MouseButtons& buttons)
 {
 	if (_selectedTool == kLineTool)
-	{
 		_line = _view->createLine(QLineF(pos, pos));
-		_line->setPen(_pen);
-	}
 }
 
 void PaintController::onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons)
@@ -74,16 +70,4 @@ void PaintController::onActionEllipseTriggered()
 {
 	qDebug() << "action Ellipse triggered";
 	_selectedTool = kEllipseTool;
-}
-
-void PaintController::onActionLineThicknessTriggered(const QString& lineThickness)
-{
-	qDebug() << "action Line Thickness triggered: " << lineThickness;
-	_pen.setWidth(lineThickness.toInt());
-}
-
-void PaintController::onColorSelected(const QColor& color)
-{
-	qDebug() << "action Color triggered";
-	_pen.setColor(color);
 }

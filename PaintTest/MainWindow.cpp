@@ -29,7 +29,7 @@ void MainWindow::initLeftToolbar()
 	tools->addAction(_ui.actionEllipse);
 
 	connect(_ui.actionSelect, SIGNAL(triggered()),
-		_controller, SLOT(onActionSelectTriggered()));
+		_view, SLOT(onActionSelectTriggered()));
 	connect(_ui.actionPen, &QAction::triggered,
 		_controller, &PaintController::onActionPenTriggered);
 	connect(_ui.actionLine, SIGNAL(triggered()),
@@ -48,10 +48,9 @@ void MainWindow::initTopToolbar()
 	_topToolBar->setIconSize(QSize(10, 10));
 	this->addToolBar(Qt::TopToolBarArea, _topToolBar);
 
+	// Color picker
 	_actionColor = new QAction(QIcon(":/MainWindow/res/icons/Transparent.png"), "Color", this);
 	_actionColor->setToolTip("Change color of the drawing item");
-
-	// Color picker
 	_topToolBar->addAction(_actionColor);
 	_topToolBar->widgetForAction(_actionColor)->setStyleSheet("background: black");
 
@@ -59,24 +58,23 @@ void MainWindow::initTopToolbar()
 	connect(_actionColor, SIGNAL(triggered()),
 		_colorDialog, SLOT(open()));
 	connect(_colorDialog, &QColorDialog::colorSelected,
-		_controller, &PaintController::onColorSelected);
+		_view, &PaintView::onColorSelected);
 	connect(_colorDialog, &QColorDialog::colorSelected,
 		this, &MainWindow::onColorSelected);
 
 	_topToolBar->addSeparator();
 
 	// Line thickness
-	_topToolBar->addWidget(new QLabel("Line Thickness: ", this));
-
 	QComboBox* lineThicknessComboBox = new QComboBox(this);
 	lineThicknessComboBox->addItem("1");
 	lineThicknessComboBox->addItem("2");
 	lineThicknessComboBox->addItem("3");
 
-	_topToolBar->addWidget(lineThicknessComboBox);
-
 	connect(lineThicknessComboBox, &QComboBox::currentTextChanged,
-		_controller, &PaintController::onActionLineThicknessTriggered);
+		_view, &PaintView::onActionLineThicknessTriggered);
+
+	_topToolBar->addWidget(new QLabel("Line Thickness: ", this));
+	_topToolBar->addWidget(lineThicknessComboBox);
 }
 
 void MainWindow::onColorSelected(const QColor& color)

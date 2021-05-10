@@ -18,9 +18,6 @@ public slots:
 	void			onActionRectangleTriggered();
 	void			onActionEllipseTriggered();
 
-	void			onActionLineThicknessTriggered(const QString& lineThickness);
-	void			onColorSelected(const QColor& color);
-
 protected slots:
 	void			onMousePress(const QPointF& pos, const Qt::MouseButtons& buttons);
 	void			onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
@@ -30,7 +27,6 @@ private:
 	PaintView*			_view;
 
 	QGraphicsLineItem*	_line;
-	QPen				_pen;
 
 	QString				_selectedTool;
 };

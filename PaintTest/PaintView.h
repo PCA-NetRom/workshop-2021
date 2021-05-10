@@ -10,6 +10,10 @@ public:
 
 	QGraphicsLineItem*	createLine(const QLineF& line);
 
+public slots:
+	void				onActionLineThicknessTriggered(const QString& lineThickness);
+	void				onColorSelected(const QColor& color);
+
 signals:
 	void				mousePress(const QPointF& pos, const Qt::MouseButtons& buttons);
 	void				mouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
@@ -24,4 +28,6 @@ private:
 
 private:
 	QGraphicsScene*	_scene;
+
+	QPen			_pen;
 };				
