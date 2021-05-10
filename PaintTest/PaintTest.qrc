@@ -1,10 +1,10 @@
 <RCC>
   <qresource prefix="MainWindow">
+    <file>res/icons/Transparent.png</file>
     <file>res/icons/Ellipse.png</file>
     <file>res/icons/Line.png</file>
     <file>res/icons/Pen.png</file>
     <file>res/icons/Rectangle.png</file>
     <file>res/icons/Select.png</file>
-    <file>res/icons/Transparent.png</file>
   </qresource>
 </RCC>

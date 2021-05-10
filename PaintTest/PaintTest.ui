@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1092</width>
-    <height>854</height>
+    <width>1113</width>
+    <height>822</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,14 +19,31 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1092</width>
+     <width>1113</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="leftToolBar">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>toolBar_2</string>
    </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
@@ -36,17 +53,26 @@
    </attribute>
    <addaction name="actionSelect"/>
    <addaction name="separator"/>
+   <addaction name="actionPen"/>
    <addaction name="actionLine"/>
+   <addaction name="actionRectangle"/>
+   <addaction name="actionEllipse"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="text">
     <string>Open...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionSave">
    <property name="text">
     <string>Save..</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="action">
@@ -62,6 +88,30 @@
   <action name="actionNew">
    <property name="text">
     <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionLine_Thickness">
+   <property name="text">
+    <string>Line Thickness</string>
+   </property>
+   <property name="toolTip">
+    <string>Line Thickness</string>
+   </property>
+  </action>
+  <action name="actionColor">
+   <property name="text">
+    <string>Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Color</string>
    </property>
   </action>
   <action name="actionSelect">
@@ -79,6 +129,21 @@
     <string>Select</string>
    </property>
   </action>
+  <action name="actionPen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="painttest.qrc">
+     <normaloff>:/MainWindow/res/icons/Pen.png</normaloff>:/MainWindow/res/icons/Pen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pen</string>
+   </property>
+   <property name="toolTip">
+    <string>Pen</string>
+   </property>
+  </action>
   <action name="actionLine">
    <property name="checkable">
     <bool>true</bool>
@@ -92,6 +157,36 @@
    </property>
    <property name="toolTip">
     <string>Line</string>
+   </property>
+  </action>
+  <action name="actionRectangle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="painttest.qrc">
+     <normaloff>:/MainWindow/res/icons/Rectangle.png</normaloff>:/MainWindow/res/icons/Rectangle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rectangle</string>
+   </property>
+   <property name="toolTip">
+    <string>Rectangle</string>
+   </property>
+  </action>
+  <action name="actionEllipse">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="painttest.qrc">
+     <normaloff>:/MainWindow/res/icons/Ellipse.png</normaloff>:/MainWindow/res/icons/Ellipse.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ellipse</string>
+   </property>
+   <property name="toolTip">
+    <string>Ellipse</string>
    </property>
   </action>
  </widget>

@@ -1,64 +1,57 @@
 #include "MainWindow.h"
-#include <QtWidgets/qlabel.h>
-#include <QtWidgets/qcombobox.h>
-#include <QtWidgets/qstatusbar.h>
+
+#include <QComboBox>
+#include <QLabel>
+#include <QStatusBar>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags)
 {
 	_ui.setupUi(this);
 
-	_view = new PaintView(this);
-	this->setCentralWidget(_view);
+	initView();
+	initController();
+
+	initLeftToolbar();
+	initTopToolbar();
+
 	this->adjustSize();
-
-	_controller = new PaintController(this, _view);
-	connect(_view, SIGNAL(mousePress(QPointF, Qt::MouseButtons)),
-			_controller, SLOT(onMousePress(QPointF, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
-		_controller, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
-		this, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
-	connect(_view, SIGNAL(mouseRelease(QPointF, Qt::MouseButtons)),
-		_controller, SLOT(onMouseRelease(QPointF, Qt::MouseButtons)));
-
-	initLeftToolBar();
-	initTopToolBar();
 }
 
-void MainWindow::initLeftToolBar()
+void MainWindow::initLeftToolbar()
 {
-	QActionGroup* actionGroup = new QActionGroup(this);
-	actionGroup->addAction(_ui.actionSelect);
-	actionGroup->addAction(_ui.actionLine);
-	_ui.actionSelect->setChecked(true);
+	QActionGroup* tools = new QActionGroup(this);
+	tools->addAction(_ui.actionSelect);
+	tools->addAction(_ui.actionPen);
+	tools->addAction(_ui.actionLine);
+	tools->addAction(_ui.actionRectangle);
+	tools->addAction(_ui.actionEllipse);
 
-	connect(_ui.actionSelect, &QAction::triggered,
-		_controller, &PaintController::onActionSelect);
-	connect(_ui.actionLine, &QAction::triggered,
-		_controller, &PaintController::onActionLine);
+	connect(_ui.actionSelect, SIGNAL(triggered()),
+		_controller, SLOT(onActionSelectTriggered()));
+	connect(_ui.actionPen, &QAction::triggered,
+		_controller, &PaintController::onActionPenTriggered);
+	connect(_ui.actionLine, SIGNAL(triggered()),
+		_controller, SLOT(onActionLineTriggered()));
+	connect(_ui.actionRectangle, SIGNAL(triggered()),
+		_controller, SLOT(onActionRectangleTriggered()));
+	connect(_ui.actionEllipse, SIGNAL(triggered()),
+		_controller, SLOT(onActionEllipseTriggered()));
+
+	_ui.actionSelect->setChecked(true);
 }
 
-void MainWindow::initTopToolBar()
+void MainWindow::initTopToolbar()
 {
 	_topToolBar = new QToolBar(this);
-	addToolBar(Qt::TopToolBarArea, _topToolBar);
-
-	_topToolBar->addWidget(new QLabel("Line thickness: "));
-
-	QComboBox* lineThickness = new QComboBox(this);
-	lineThickness->addItem("1");
-	lineThickness->addItem("2");
-	lineThickness->addItem("3");
-
-	_topToolBar->addWidget(lineThickness);
-
-	connect(lineThickness, &QComboBox::currentTextChanged,
-		_view, &PaintView::onLineThickessChanged);
+	_topToolBar->setIconSize(QSize(10, 10));
+	this->addToolBar(Qt::TopToolBarArea, _topToolBar);
 
 	_actionColor = new QAction(QIcon(":/MainWindow/res/icons/Transparent.png"), "Color", this);
 	_actionColor->setToolTip("Change color of the drawing item");
 
+	// Color picker
 	_topToolBar->addAction(_actionColor);
 	_topToolBar->widgetForAction(_actionColor)->setStyleSheet("background: black");
 
@@ -66,18 +59,51 @@ void MainWindow::initTopToolBar()
 	connect(_actionColor, SIGNAL(triggered()),
 		_colorDialog, SLOT(open()));
 	connect(_colorDialog, &QColorDialog::colorSelected,
-		_view, &PaintView::onColorChanged);
+		_controller, &PaintController::onColorSelected);
 	connect(_colorDialog, &QColorDialog::colorSelected,
-		this, &MainWindow::onColorChanged);
+		this, &MainWindow::onColorSelected);
 
+	_topToolBar->addSeparator();
+
+	// Line thickness
+	_topToolBar->addWidget(new QLabel("Line Thickness: ", this));
+
+	QComboBox* lineThicknessComboBox = new QComboBox(this);
+	lineThicknessComboBox->addItem("1");
+	lineThicknessComboBox->addItem("2");
+	lineThicknessComboBox->addItem("3");
+
+	_topToolBar->addWidget(lineThicknessComboBox);
+
+	connect(lineThicknessComboBox, &QComboBox::currentTextChanged,
+		_controller, &PaintController::onActionLineThicknessTriggered);
 }
 
-void MainWindow::onColorChanged(const QColor& color)
+void MainWindow::onColorSelected(const QColor& color)
 {
 	_topToolBar->widgetForAction(_actionColor)->setStyleSheet("background: " + color.name());
 }
 
-void MainWindow::onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons)
+void MainWindow::initView()
+{
+	_view = new PaintView(this);
+	this->setCentralWidget(_view);
+}
+
+void MainWindow::initController()
+{
+	_controller = new PaintController(this, _view);
+	connect(_view, SIGNAL(mousePress(QPointF, Qt::MouseButtons)),
+		_controller, SLOT(onMousePress(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
+		_controller, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseMove(QPointF, Qt::MouseButtons)),
+		this, SLOT(onMouseMove(QPointF, Qt::MouseButtons)));
+	connect(_view, SIGNAL(mouseRelease(QPointF, Qt::MouseButtons)),
+		_controller, SLOT(onMouseRelease(QPointF, Qt::MouseButtons)));
+}
+
+void MainWindow::onMouseMove(const QPointF& pos, const Qt::MouseButtons& /*buttons*/)
 {
 	QString msg;
 	msg.sprintf("%1.0fx%1.0f", pos.x(), pos.y());
