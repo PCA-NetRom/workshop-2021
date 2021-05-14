@@ -28,16 +28,8 @@ void MainWindow::initLeftToolbar()
 	tools->addAction(_ui.actionRectangle);
 	tools->addAction(_ui.actionEllipse);
 
-	connect(_ui.actionSelect, SIGNAL(triggered()),
-		_view, SLOT(onActionSelectTriggered()));
-	connect(_ui.actionPen, &QAction::triggered,
-		_controller, &PaintController::onActionPenTriggered);
-	connect(_ui.actionLine, SIGNAL(triggered()),
-		_controller, SLOT(onActionLineTriggered()));
-	connect(_ui.actionRectangle, SIGNAL(triggered()),
-		_controller, SLOT(onActionRectangleTriggered()));
-	connect(_ui.actionEllipse, SIGNAL(triggered()),
-		_controller, SLOT(onActionEllipseTriggered()));
+	connect(_ui.actionLine, &QAction::triggered, [this]() { onToolSelected(ToolType::eLine); });
+	connect(_ui.actionSelect, &QAction::triggered, [this]() { onToolSelected(ToolType::eSelect); });
 
 	_ui.actionSelect->setChecked(true);
 }
@@ -80,6 +72,11 @@ void MainWindow::initTopToolbar()
 void MainWindow::onColorSelected(const QColor& color)
 {
 	_topToolBar->widgetForAction(_actionColor)->setStyleSheet("background: " + color.name());
+}
+
+void MainWindow::onToolSelected(const ToolType type)
+{
+	_controller->onToolSelected(type);
 }
 
 void MainWindow::initView()

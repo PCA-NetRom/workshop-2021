@@ -21,6 +21,11 @@ QGraphicsLineItem* PaintView::createLine(const QLineF& line)
 	return _scene->addLine(line, _pen);
 }
 
+QGraphicsItem* PaintView::itemAt(const QPointF& pos)
+{
+	return _scene->itemAt(pos, QTransform());
+}
+
 void PaintView::onActionLineThicknessTriggered(const QString& lineThickness)
 {
 	qDebug() << "action Line Thickness triggered: " << lineThickness;
