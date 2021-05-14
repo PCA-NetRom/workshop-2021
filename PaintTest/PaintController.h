@@ -2,7 +2,10 @@
 
 #include <QtCore/QObject>
 
+#include <memory>
+
 #include "PaintView.h"
+#include "tools/Tool.h"
 
 class PaintController : public QObject
 {
@@ -10,13 +13,7 @@ class PaintController : public QObject
 
 public:
 					PaintController(QObject *parent, PaintView* view);
-
-public slots:
-	void			onActionSelectTriggered();
-	void			onActionPenTriggered();
-	void			onActionLineTriggered();
-	void			onActionRectangleTriggered();
-	void			onActionEllipseTriggered();
+	void			onToolSelected(ToolType type);
 
 protected slots:
 	void			onMousePress(const QPointF& pos, const Qt::MouseButtons& buttons);
@@ -28,5 +25,5 @@ private:
 
 	QGraphicsLineItem*	_line;
 
-	QString				_selectedTool;
+	std::shared_ptr<Tool> _currentTool;
 };

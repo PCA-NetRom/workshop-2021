@@ -10,6 +10,7 @@ public:
 
 	QGraphicsLineItem*	createLine(const QLineF& line);
 
+	QGraphicsItem*		itemAt(const QPointF& pos);
 public slots:
 	void				onActionLineThicknessTriggered(const QString& lineThickness);
 	void				onColorSelected(const QColor& color);

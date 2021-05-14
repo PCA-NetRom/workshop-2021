@@ -186,6 +186,9 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PaintController.cpp" />
     <ClCompile Include="PaintView.cpp" />
+    <ClCompile Include="tools\LineTool.cpp" />
+    <ClCompile Include="tools\SelectTool.cpp" />
+    <ClCompile Include="tools\Tool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -229,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_PaintTest.h" />
+    <ClInclude Include="tools\LineTool.h" />
+    <ClInclude Include="tools\SelectTool.h" />
+    <ClInclude Include="tools\Tool.h" />
     <CustomBuild Include="PaintController.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>

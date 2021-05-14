@@ -8,6 +8,8 @@
 #include "PaintController.h"
 #include "ui_painttest.h"
 
+#include "tools/Tool.h"
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -17,6 +19,7 @@ public:
 protected slots:
 	void		onMouseMove(const QPointF& pos, const Qt::MouseButtons& buttons);
 	void		onColorSelected(const QColor& color);
+	void		onToolSelected(const ToolType type);
 
 private:
 	void		initView();
