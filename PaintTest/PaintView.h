@@ -8,9 +8,12 @@ class PaintView : public QGraphicsView
 public:
 						PaintView(QWidget *parent);
 
-	QGraphicsLineItem*	createLine(const QLineF& line);
+	QGraphicsPathItem*		createPath(const QPainterPath& path);
+	QGraphicsLineItem*		createLine(const QLineF& line);
+	QGraphicsRectItem*		createRectangle(const QRectF& rectangle);
+	QGraphicsEllipseItem*	createEllipse(const QRectF& ellipse);
+	QGraphicsItem*			itemAt(const QPointF& pos);
 
-	QGraphicsItem*		itemAt(const QPointF& pos);
 public slots:
 	void				onActionLineThicknessTriggered(const QString& lineThickness);
 	void				onColorSelected(const QColor& color);
@@ -31,4 +34,5 @@ private:
 	QGraphicsScene*	_scene;
 
 	QPen			_pen;
+	QBrush			_brush;
 };				
