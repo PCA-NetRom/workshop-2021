@@ -16,9 +16,24 @@ PaintView::PaintView(QWidget *parent)
 	this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
+QGraphicsPathItem* PaintView::createPath(const QPainterPath& path)
+{
+	return _scene->addPath(path, _pen);
+}
+
 QGraphicsLineItem* PaintView::createLine(const QLineF& line)
 {
 	return _scene->addLine(line, _pen);
+}
+
+QGraphicsRectItem* PaintView::createRectangle(const QRectF& rectangle)
+{
+	return _scene->addRect(rectangle, _pen, _brush);
+}
+
+QGraphicsEllipseItem* PaintView::createEllipse(const QRectF& ellipse)
+{
+	return _scene->addEllipse(ellipse, _pen, _brush);
 }
 
 QGraphicsItem* PaintView::itemAt(const QPointF& pos)
@@ -36,6 +51,7 @@ void PaintView::onColorSelected(const QColor& color)
 {
 	qDebug() << "action Color triggered";
 	_pen.setColor(color);
+	_brush.setColor(color);
 }
 
 void PaintView::initScene()
