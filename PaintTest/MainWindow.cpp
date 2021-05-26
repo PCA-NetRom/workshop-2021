@@ -30,6 +30,9 @@ void MainWindow::initLeftToolbar()
 
 	connect(_ui.actionLine, &QAction::triggered, [this]() { onToolSelected(ToolType::eLine); });
 	connect(_ui.actionSelect, &QAction::triggered, [this]() { onToolSelected(ToolType::eSelect); });
+	connect(_ui.actionRectangle, &QAction::triggered, [this]() { onToolSelected(ToolType::eRectangle); });
+	connect(_ui.actionEllipse, &QAction::triggered, [this]() { onToolSelected(ToolType::eEllipse); });
+	connect(_ui.actionPen, &QAction::triggered, [this]() { onToolSelected(ToolType::ePen); });
 
 	_ui.actionSelect->setChecked(true);
 }

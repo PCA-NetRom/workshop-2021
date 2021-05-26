@@ -186,7 +186,10 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PaintController.cpp" />
     <ClCompile Include="PaintView.cpp" />
+    <ClCompile Include="tools\EllipseTool.cpp" />
     <ClCompile Include="tools\LineTool.cpp" />
+    <ClCompile Include="tools\PenTool.cpp" />
+    <ClCompile Include="tools\RectangleTool.cpp" />
     <ClCompile Include="tools\SelectTool.cpp" />
     <ClCompile Include="tools\Tool.cpp" />
   </ItemGroup>
@@ -232,7 +235,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_PaintTest.h" />
+    <ClInclude Include="tools\EllipseTool.h" />
     <ClInclude Include="tools\LineTool.h" />
+    <ClInclude Include="tools\PenTool.h" />
+    <ClInclude Include="tools\RectangleTool.h" />
     <ClInclude Include="tools\SelectTool.h" />
     <ClInclude Include="tools\Tool.h" />
     <CustomBuild Include="PaintController.h">
