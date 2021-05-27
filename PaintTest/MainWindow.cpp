@@ -4,6 +4,10 @@
 #include <QLabel>
 #include <QStatusBar>
 #include <QDebug>
+#include <QMessageBox>
+#include <QFileDialog>
+
+#include "storage/SceneStore.h"
 
 MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags)
@@ -34,7 +38,48 @@ void MainWindow::initLeftToolbar()
 	connect(_ui.actionEllipse, &QAction::triggered, [this]() { onToolSelected(ToolType::eEllipse); });
 	connect(_ui.actionPen, &QAction::triggered, [this]() { onToolSelected(ToolType::ePen); });
 
+	connect(_ui.actionNew, SIGNAL(triggered()), this, SLOT(clearScene()));
+	connect(_ui.actionSave, SIGNAL(triggered()), this, SLOT(saveScene()));
+	connect(_ui.actionOpen, SIGNAL(triggered()), this, SLOT(openScene()));
+
 	_ui.actionSelect->setChecked(true);
+	_ui.actionSelect->trigger();
+}
+
+void MainWindow::clearScene()
+{
+	int exitCode = QMessageBox::question(this, "Painter", "All items will be lost, proceed ?",
+		QMessageBox::Ok | QMessageBox::Cancel);
+
+	if (exitCode == QMessageBox::Ok)
+		this->_view->scene()->clear();
+}
+
+void MainWindow::saveScene()
+{
+	QString filePath = QFileDialog::getSaveFileName(this, "Save scene", QDir::homePath(),
+													"JSON (*.json);;JPG (*.jpg);;PNG (*.png)");
+
+	if (!filePath.isEmpty())
+	{
+		if (!SceneStore::saveScene(_view, filePath))
+		{
+			//log error
+		}
+	}
+}
+
+void MainWindow::openScene()
+{
+	QString filePath = QFileDialog::getOpenFileName(this, "Open file", QDir::homePath(), "JSON (*.json)");
+
+	if (!filePath.isEmpty())
+	{
+		if (!SceneStore::loadSceneFromJson(_view, filePath))
+		{
+			// log error
+		}
+	}
 }
 
 void MainWindow::initTopToolbar()

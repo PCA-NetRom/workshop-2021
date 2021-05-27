@@ -36,6 +36,9 @@
     <Filter Include="Source Files\tools">
       <UniqueIdentifier>{06493f58-0489-480a-8c1f-52451feea33c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\storage">
+      <UniqueIdentifier>{b621dcfc-55c7-4eb0-a894-537bf741c12f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,6 +92,9 @@
     <ClCompile Include="tools\RectangleTool.cpp">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
+    <ClCompile Include="storage\SceneStore.cpp">
+      <Filter>Source Files\storage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -127,6 +133,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tools\RectangleTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\SceneStore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

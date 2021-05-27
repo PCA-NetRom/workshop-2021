@@ -21,6 +21,11 @@ protected slots:
 	void		onColorSelected(const QColor& color);
 	void		onToolSelected(const ToolType type);
 
+private slots:
+	void		clearScene();
+	void		saveScene();
+	void		openScene();
+
 private:
 	void		initView();
 	void		initController();
